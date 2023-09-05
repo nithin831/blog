@@ -1,0 +1,27 @@
+{% extends "app/base.html" %}
+{% block title_block %}
+	 share
+{% endblock title_block %}
+
+{% block body_block %}
+
+	{% if sent %}
+		<h2>email sent sucessfully</h2>
+		<h2>Post with title: {{ post.title }} shared by email</h2>
+		<a href="{{ post.get_absolute_url }}" class = "btn btn-lg btn-sucess", id = "smail"> back</a>
+		{# <a href="{{request.META.HTTP_REFERER|escape}}" class = "btn btn-lg btn-sucess", id = "smail">back</a> #}
+	{% else %}
+		<h2>Share post with Title: {{ post.title }} by email</h2>
+		<form method="POST">
+		{{ form.as_p }}
+		{% csrf_token %}
+		<input type="submit" name=""  class="btn btn-primary btn-lg" value="share">
+		<a href="{{ post.get_absolute_url }}" class = "btn btn-lg btn-sucess", id = "smail"> cancel</a>	 
+		{# <a href="{{request.META.HTTP_REFERER|escape}}" class = "btn btn-lg btn-sucess", id = "smail">cancel</a> #}
+	</form>
+		
+	{% endif %}
+
+	
+	
+{% endblock body_block %}

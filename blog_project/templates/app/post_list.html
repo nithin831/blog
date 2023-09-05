@@ -1,0 +1,33 @@
+{% extends "app/base.html" %}
+{% block title_block %}
+	home page
+{% endblock title_block %}
+
+{% block body_block %}
+	<h1>General Blog</h1>
+	{% if tag %}
+		<h2>post tagged with {{tag.name}}</h2>
+	{% endif %}
+	
+	{% for post in post_list  %}
+		<a href="{{ post.get_absolute_url }}"><h2>{{ post.title }}</h2></a>
+		<p id = "pdate">published on {{ post.publish }} by {{ post.author|title }}</p>
+		
+		<p>Tags: 
+			{% for t in post.tags.all %}
+				<a href="{% url "tags_nk" t.slug %}" class = "btn btn-lg btn-sucess", id = "smail"> {{t.name}}</a>
+			{% endfor %}
+		</p>
+
+		{{ post.body| truncatewords:40 | linebreaks}}
+	{% endfor %}
+	<div class="container" align="center">
+		{% if tag %}
+			<a href="{% url "home"%}" class = "btn btn-lg btn-sucess", id = "smail"> Exit</a>
+		{% endif %}
+	</div>
+	{% if not tag %}
+		{% include "app/pagination.html" with page=post_list %}  {# this is for fbv#}
+	{% endif %}
+	{# {% include "app/pagination.html" with page=page_obj %} #} {# this is for cbv #} 
+{% endblock body_block %}

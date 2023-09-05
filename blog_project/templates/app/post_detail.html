@@ -1,0 +1,46 @@
+{% extends "app/base.html" %}
+{% block title_block %}
+	{{ post.title }}
+{% endblock title_block %}
+
+{% block body_block %}
+	<h1>{{ post.title }}</h1>
+	<p id = "pdate">published on {{ post.publish }} by {{ post.author|title }}</p>
+	{{ post.body| linebreaks}}
+
+	<div class="container" align="center">
+		<a href="/{{ post.id }}/share" class = "btn btn-lg btn-sucess", id = "smail"> share via mail</a>
+		<a href="{% url "home"%}" class = "btn btn-lg btn-sucess", id = "smail"> exit</a>
+		{# <a href="{{request.META.HTTP_REFERER|escape}}" class = "btn btn-lg btn-sucess", id = "smail"> retu</a>	 #}
+		{# <a href="javascript:history.go(-1)" class = "btn btn-lg btn-sucess", id = "smail"> return</a> #}
+	</div>
+	<hr>
+	
+	<h2>{{ comment.count }} comment{{ comment.count|pluralize }}</h2>
+
+	{% if comment %}
+		{% for c  in comment %}
+			<p id = "cmt">comment {{ forloop.counter }} by {{ c.name }} on {{ c.created }}</p>
+			
+				{{ c.comment|linebreaks }}
+					
+		{% endfor %}
+	{% else %}
+		<h2>no comments yet!!!</h2>
+	{% endif %}
+
+	{# {% include "app/pagination.html" with page=comment %}  #}
+	
+	<hr>
+	{% if csubmit %}
+		<h2>comment added sucessfully</h2>
+		<a href="{{ post.get_absolute_url }}" class = "btn btn-lg btn-sucess", id = "smail"> back</a>	
+	{% else %}
+		<form method="POST">			 
+			 {{ form.as_p }}
+			 {% csrf_token %}
+			 <input type="submit" name="" value="post" class = "btn btn-lg btn-sucess", id = "smail" >
+		</form>	 
+	{% endif %}
+	
+{% endblock body_block %}

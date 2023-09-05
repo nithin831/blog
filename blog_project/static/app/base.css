@@ -1,0 +1,48 @@
+.content{
+	color:white;
+	background: black;
+	float: left;
+	width: 80%;
+	height: 100%;
+	padding: 10px 0px 0px 30px;
+}
+
+.sidebar{
+	color:black;
+	background: white;
+	float: right;
+	width: 20%;
+	height: 100%;
+	padding:  10px;
+}
+
+h1{
+	text-align : center;
+}
+
+#pdate{
+	color :yellow;
+
+}
+
+body{
+	background: black;
+}
+
+#smail{
+	background: blueviolet;
+	color :white;
+	margin-right: 20px;
+
+}
+
+#cmt{
+	color: skyblue;
+	border-bottom: 2px solid yellowgreen;
+	font-style: italic;
+}
+
+#blog_cnt{
+ 	font-weight: bold;
+ 	font-size: 30px;
+}
